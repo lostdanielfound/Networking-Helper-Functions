@@ -34,6 +34,7 @@ void get_network_id(char *ip_addr, char mask, char *output_buffer) {
  *
  * */
 void get_broadcast_address(char *ip_addr, char mask, char *output_buffer) {
+
 	// Obtain the network ID in integer format
 	const int BUFFER_SIZE = 16;
     char network_id_str[BUFFER_SIZE];
@@ -61,10 +62,15 @@ unsigned int get_ip_integeral_equivalent(char *ip_address) {
 	unsigned int octet_array[OCTET_AMOUNT];
 	unsigned int result = 0;
 
-	// Getting the first octet in integer format
-	octet_array[0] = atoi(strtok(ip_address, "."));
+    // To prevent the original ip_address string from being modified, a 
+    // temporary buffer is created for which the content of the original string
+    // is copied over.
+    char *copy_buffer = (char *)malloc(strlen(ip_address) + 1);
+    strcpy(copy_buffer, ip_address);
+    
+	octet_array[0] = atoi(strtok(copy_buffer, "."));
 	for (int i = 1; i < OCTET_AMOUNT; i++) {
-		octet_array[i] = atoi(strtok(NULL, ".")); // Individual Octet portion converted into integer format	
+		octet_array[i] = atoi(strtok(NULL, ".")); 
 	}
 
 	// Shift the first Octet array element 24 times and perform a logical OR with the result variable
