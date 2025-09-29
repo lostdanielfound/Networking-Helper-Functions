@@ -33,7 +33,7 @@ int main() {
         }
 
         get_broadcast_address(IP_address[i], mask[i], output_buffer);
-        printf("%d. IP address = %s, subnet mask = %d, Broadcast Address = %s", i, IP_address[i], (unsigned)mask[i], output_buffer);
+        printf("%d. IP address = %s, subnet mask = %d, Broadcast Address = %s\n", i + 1, IP_address[i], (unsigned)mask[i], output_buffer);
 
         free(output_buffer);
 
